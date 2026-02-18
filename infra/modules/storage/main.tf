@@ -34,7 +34,7 @@ resource "azurerm_storage_account" "adls" {
 
   tags = {
     environment = "dev"
-    project     = "nexus"
+    project     = "fintech-data-engine"
   }
 }
 

@@ -1,7 +1,7 @@
-# Project Nexus: High-Frequency Market & Sentiment Analysis Platform
+# Fintech Data Engine: High-Frequency Market & Sentiment Analysis Platform
 
 ## Overview
-**Project Nexus** is a professional-grade Data Engineering platform designed to ingest, process, and analyze high-frequency market data alongside social sentiment signals. It mimics a real-world Fintech data platform, solving "Day 2" problems like data contracts, schema evolution, and infrastructure security.
+**Fintech Data Engine** is a professional-grade Data Engineering platform designed to ingest, process, and analyze high-frequency market data alongside social sentiment signals. It mimics a real-world Fintech data platform, solving "Day 2" problems like data contracts, schema evolution, and infrastructure security.
 
 ## Architecture
 
@@ -95,7 +95,7 @@ The platform follows the **Medallion Architecture** (Lakehouse pattern):
 
 ## Project Structure
 ```bash
-project_nexus/
+fintech-data-engine/
 ├── dbt/                    # dbt Core project
 │   ├── models/             # SQL Models (Staging, Marts)
 │   └── dbt_project.yml     # dbt Configuration

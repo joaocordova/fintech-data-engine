@@ -1,8 +1,8 @@
-name: 'project_nexus'
+name: 'fintech_data_engine'
 version: '1.0.0'
 config-version: 2
 
-profile: 'project_nexus'
+profile: 'fintech_data_engine'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -14,7 +14,7 @@ snapshot-paths: ["snapshots"]
 target-path: "target"  # directory which will store compiled SQL files
 
 models:
-  project_nexus:
+  fintech_data_engine:
     staging:
       +materialized: view
     marts:
