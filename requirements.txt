@@ -1,0 +1,11 @@
+alpaca-trade-api
+azure-storage-file-datalake
+azure-identity
+pandas
+pandera
+fastapi
+uvicorn
+python-dotenv
+websockets
+soda-core-azure-storage
+soda-core-postgresql

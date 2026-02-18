@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: "Raw data from ADLS Gen 2"
+    tables:
+      - name: market_data
+        description: "Raw market data from Alpaca/Streaming"
+        columns:
+          - name: symbol
+            tests:
+              - not_null
+          - name: price
+          - name: timestamp
