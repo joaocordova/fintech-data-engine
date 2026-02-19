@@ -38,9 +38,18 @@ graph TD
         Airflow[Apache Airflow]
     end
 
+    %% Machine Learning Layer
+    subgraph ML["Machine Learning (Prophet + MLflow)"]
+        Features[Feature Engineering<br/>(Lagged Sentiment)]
+        Training[Model Training<br/>(Prophet)]
+        Registry[Model Registry<br/>(MLflow)]
+        Inference[Inference API<br/>(FastAPI)]
+    end
+
     %% Serving Layer
     subgraph Serving["Serving Layer"]
         Postgres[(Azure Postgres DB<br/>Analytical Serving)]
+        Dashboard[Streamlit Dashboard]
     end
 
     %% Flows
@@ -53,6 +62,13 @@ graph TD
     Silver --> dbt_silver
     dbt_silver --> Gold
     dbt_gold --> Postgres
+    
+    Gold --> Features
+    Features --> Training
+    Training --> Registry
+    Registry --> Inference
+    Inference --> Dashboard
+    Postgres --> Dashboard
 
     %% Observability
     subgraph Observability

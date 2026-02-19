@@ -48,9 +48,18 @@ graph TD
         Airflow[Apache Airflow]
     end
 
+    %% Machine Learning Layer
+    subgraph ML["Machine Learning (Prophet + MLflow)"]
+        Features[Feature Engineering<br/>(Lagged Sentiment)]
+        Training[Model Training<br/>(Prophet)]
+        Registry[Model Registry<br/>(MLflow)]
+        Inference[Inference API<br/>(FastAPI)]
+    end
+
     %% Serving Layer
     subgraph Serving["Serving Layer"]
         Postgres[(Azure Postgres DB<br/>Analytical Serving)]
+        Dashboard[Streamlit Dashboard]
     end
 
     %% Flows
@@ -63,6 +72,13 @@ graph TD
     Silver --> dbt_silver
     dbt_silver --> Gold
     dbt_gold --> Postgres
+    
+    Gold --> Features
+    Features --> Training
+    Training --> Registry
+    Registry --> Inference
+    Inference --> Dashboard
+    Postgres --> Dashboard
 
     %% Observability
     subgraph Observability
@@ -84,11 +100,14 @@ The platform follows the **Medallion Architecture** (Lakehouse pattern):
 -   **IaC**: Terraform (Modularized)
 -   **Ingestion**: Python (FastAPI for WebSockets, AsyncIO for Batch)
 -   **Transformation**: dbt Core (SCD Type 2, Incremental Models)
+-   **Machine Learning**: Prophet (Forecasting), MLflow (Tracking), Scikit-Learn
 -   **Orchestration**: Apache Airflow
+-   **Visualization**: Streamlit, Plotly
 -   **Quality**: Soda / Great Expectations
 
 ## Key Features
 -   **Hybrid Ingestion**: Handles both real-time WebSocket streams (Trade updates) and batch historical backfills.
+-   **ML Forecasting**: Predicts future stock volatility based on historical price and sentiment signals.
 -   **Data Contracts**: Enforces schema validity at the edge (before data hits the lake).
 -   **Security**: All infrastructure provisioned within a VNet with Private Endpoints; secrets managed by Key Vault.
 -   **Idempotency**: Pipelines designed to be re-runnable without data duplication.
@@ -103,9 +122,12 @@ fintech-data-engine/
 │   ├── modules/            # Reusable Modules (ADLS, Postgres, VNet)
 ├── src/                    # Python Source Code
 │   ├── ingestion/          # Ingestion Scripts (Batch & Streaming)
+│   ├── ml/                 # Machine Learning (Prophet, Training, Inference)
+│   └── dashboard/          # Streamlit Dashboard
 ├── architecture.mmd        # Mermaid Architecture Diagram
 ├── data_quality.md         # Data Contracts & Quality Framework
 ├── tradeoffs.md            # Senior-level Architectural Decisions
+├── IMPLEMENTATION_GUIDE.md # Detailed Step-by-Step Guide
 └── requirements.txt        # Python Dependencies
 ```
 
@@ -139,5 +161,22 @@ uvicorn src.ingestion.stream_listener:app --reload
 cd dbt
 # dbt deps
 # dbt build
+```
+
+### 4. Machine Learning
+```bash
+# Feature Engineering (Fetch Real Data)
+python src/ml/feature_engineering.py
+
+# Train Model
+python src/ml/train_forecast.py
+
+# Run Inference Demo
+python src/ml/demo_inference.py
+```
+
+### 5. Dashboard
+```bash
+streamlit run src/dashboard/app.py
 ```
 
