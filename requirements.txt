@@ -9,3 +9,6 @@ python-dotenv
 websockets
 soda-core-azure-storage
 soda-core-postgresql
+streamlit
+plotly
+psycopg2-binary
