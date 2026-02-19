@@ -5,8 +5,6 @@
 
 ## Architecture
 
-## Architecture
-
 ```mermaid
 graph TD
     %% Source Layer
