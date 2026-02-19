@@ -1,15 +1,15 @@
 graph TD
     %% Source Layer
     subgraph Sources
-        Alpaca[Alpaca Markets API<br/>(Stocks/Crypto)]
-        Reddit[Reddit API<br/>(Sentiment)]
+        Alpaca["Alpaca Markets API<br/>(Stocks/Crypto)"]
+        Reddit["Reddit API<br/>(Sentiment)"]
     end
 
     %% Ingestion Layer
     subgraph Ingestion["Ingestion Layer (Python/AKS)"]
-        Stream[Streaming Listener<br/>(FastAPI + WebSockets)]
-        Batch[Batch Backfill<br/>(Python Job)]
-        Contracts[Data Contracts<br/>(Pandera/Pydantic)]
+        Stream["Streaming Listener<br/>(FastAPI + WebSockets)"]
+        Batch["Batch Backfill<br/>(Python Job)"]
+        Contracts["Data Contracts<br/>(Pandera/Pydantic)"]
         
         Alpaca -->|Real-time| Stream
         Alpaca -->|Historical| Batch
@@ -21,35 +21,35 @@ graph TD
 
     %% Storage Layer (Data Lake)
     subgraph Storage["Azure Data Lake Gen 2 (ADLS)"]
-        Bronze[(Bronze Layer<br/>Raw JSON/Parquet)]
-        Silver[(Silver Layer<br/>Cleaned Delta/Parquet)]
-        Gold[(Gold Layer<br/>Business Aggregates)]
+        Bronze[("Bronze Layer<br/>Raw JSON/Parquet")]
+        Silver[("Silver Layer<br/>Cleaned Delta/Parquet")]
+        Gold[("Gold Layer<br/>Business Aggregates")]
     end
 
     %% Processing Layer
     subgraph Transformation["Transformation (dbt Core)"]
-        dbt_bronze[Staging Models]
-        dbt_silver[Cleansing & Deduping]
-        dbt_gold[SCD Type 2 & Facts]
+        dbt_bronze["Staging Models"]
+        dbt_silver["Cleansing & Deduping"]
+        dbt_gold["SCD Type 2 & Facts"]
     end
 
     %% Orchestration
     subgraph Orchestrator["Orchestration"]
-        Airflow[Apache Airflow]
+        Airflow["Apache Airflow"]
     end
 
     %% Machine Learning Layer
     subgraph ML["Machine Learning (Prophet + MLflow)"]
-        Features[Feature Engineering<br/>(Lagged Sentiment)]
-        Training[Model Training<br/>(Prophet)]
-        Registry[Model Registry<br/>(MLflow)]
-        Inference[Inference API<br/>(FastAPI)]
+        Features["Feature Engineering<br/>(Lagged Sentiment)"]
+        Training["Model Training<br/>(Prophet)"]
+        Registry["Model Registry<br/>(MLflow)"]
+        Inference["Inference API<br/>(FastAPI)"]
     end
 
     %% Serving Layer
     subgraph Serving["Serving Layer"]
-        Postgres[(Azure Postgres DB<br/>Analytical Serving)]
-        Dashboard[Streamlit Dashboard]
+        Postgres[("Azure Postgres DB<br/>Analytical Serving")]
+        Dashboard["Streamlit Dashboard"]
     end
 
     %% Flows
@@ -72,8 +72,8 @@ graph TD
 
     %% Observability
     subgraph Observability
-        Soda[Soda/Great Expectations<br/>Data Quality]
-        Monitor[Azure Monitor]
+        Soda["Soda/Great Expectations<br/>Data Quality"]
+        Monitor["Azure Monitor"]
     end
 
     Transformation -.->|Quality Checks| Soda
