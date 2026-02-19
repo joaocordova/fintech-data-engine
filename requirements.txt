@@ -12,3 +12,6 @@ soda-core-postgresql
 streamlit
 plotly
 psycopg2-binary
+prophet
+mlflow
+scikit-learn
