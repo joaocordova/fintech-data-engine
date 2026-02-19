@@ -1,0 +1,21 @@
+artifact_path: file:C:/Users/Skyfit/.gemini/antigravity/scratch/fintech-data-engine/mlruns/1/models/m-1c8f63f491fb4b599141e426ca829a69/artifacts
+flavors:
+  prophet:
+    code: null
+    data: model.pr
+    model_type: Prophet
+    prophet_version: 1.3.0
+  python_function:
+    data: model.pr
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.prophet
+    python_version: 3.12.10
+mlflow_version: 3.9.0
+model_id: m-1c8f63f491fb4b599141e426ca829a69
+model_size_bytes: 136246
+model_uuid: m-1c8f63f491fb4b599141e426ca829a69
+prompts: null
+run_id: 9774f1caa30247b2bca05c67fdd6d0b2
+utc_time_created: '2026-02-19 15:01:30.384249'

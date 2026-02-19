@@ -8,7 +8,7 @@ import os
 
 def train_forecast_model():
     # 1. Load Data
-    df = get_training_data(days=365)
+    df = get_training_data(ticker="NVDA", years=2)
     
     # Split Train/Test
     train_size = int(len(df) * 0.9)
